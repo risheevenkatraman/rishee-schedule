@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node --test",
-    "build": "next build heart --webpack && node scripts/export-heart.js",
+    "build": "node scripts/build-heart.js",
     "dev:heart": "next dev heart --port 3001",
     "build:amplify": "npm run build && node scripts/build-amplify.js",
     "format": "prettier --write .",
