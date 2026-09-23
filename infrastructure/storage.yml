@@ -6,10 +6,6 @@ Parameters:
     Default: https://setup.invalid
     Description: Exact HTTPS app origin without a trailing slash. Update after Amplify assigns the URL.
     AllowedPattern: 'https://[a-zA-Z0-9.-]+'
-  AmplifyAppId:
-    Type: String
-    Default: '*'
-    Description: Restrict to your Amplify app ID after creating the app.
 Resources:
   Records:
     Type: AWS::DynamoDB::Table
@@ -109,13 +105,6 @@ Resources:
             Principal:
               Service: amplify.amazonaws.com
             Action: sts:AssumeRole
-            Condition:
-              StringEquals:
-                aws:SourceAccount: !Ref AWS::AccountId
-              ArnLike:
-                aws:SourceArn:
-                  - !Sub 'arn:${AWS::Partition}:amplify:${AWS::Region}:${AWS::AccountId}:apps/${AmplifyAppId}'
-                  - !Sub 'arn:${AWS::Partition}:amplify:${AWS::Region}:${AWS::AccountId}:apps/${AmplifyAppId}/branches/main'
       Policies:
         - PolicyName: CalendarStorage
           PolicyDocument:
