@@ -1,0 +1,33 @@
+{
+  "name": "r-and-r-calendar",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "build": "next build heart --webpack && node scripts/export-heart.js",
+    "dev:heart": "next dev heart --port 3001",
+    "build:amplify": "npm run build && node scripts/build-amplify.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1138.0",
+    "@aws-sdk/client-s3": "^3.1138.0",
+    "@aws-sdk/client-secrets-manager": "^3.1138.0",
+    "@aws-sdk/lib-dynamodb": "^3.1138.0",
+    "@aws-sdk/s3-presigned-post": "^3.1138.0",
+    "@aws-sdk/s3-request-presigner": "^3.1138.0",
+    "next": "^16.3.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "prettier": "^3.9.9"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+data/
+heart/.next/
+heart/out/
+package-lock.json
+docs/
+.amplify-hosting/

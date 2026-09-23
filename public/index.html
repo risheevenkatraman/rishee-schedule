@@ -1,0 +1,2103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>R&amp;R Calendar</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <section id="login" class="login-screen" hidden>
+      <form id="login-form" class="login-card">
+        <div class="brand">
+          <span class="brand-name">R&amp;R<span>Calendar</span></span>
+        </div>
+        <h1>Sign in</h1>
+        <label for="password">Workspace password</label
+        ><input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          placeholder="Enter your password"
+        /><button class="primary" type="submit">
+          Unlock workspace <span>↗</span>
+        </button>
+        <p id="login-error" role="alert"></p>
+        <small>♧ &nbsp; Your workspace is password protected</small>
+      </form>
+    </section>
+    <section
+      id="welcome-loading"
+      class="welcome-loading"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading your calendar"
+      hidden
+    >
+      <!-- particle-heart:start -->
+      <div class="particle-heart" aria-hidden="true">
+        <div class="particle-heart-glow"></div>
+        <div class="particle-heart-cloud">
+          <span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: -37.5px;
+              --from-x: 125px;
+              --from-y: 0px;
+              --delay: 0ms;
+              --size: 3.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.17px;
+              --y: -39.3px;
+              --from-x: -115.03px;
+              --from-y: 105.38px;
+              --delay: 17ms;
+              --size: 4.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 1.34px;
+              --y: -44.39px;
+              --from-x: 16.35px;
+              --from-y: -186.28px;
+              --delay: 34ms;
+              --size: 5.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 4.35px;
+              --y: -51.91px;
+              --from-x: 93.09px;
+              --from-y: 121.42px;
+              --delay: 51ms;
+              --size: 3.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 9.8px;
+              --y: -60.58px;
+              --from-x: -181.19px;
+              --from-y: -32.05px;
+              --delay: 68ms;
+              --size: 4.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 17.89px;
+              --y: -68.93px;
+              --from-x: 126.56px;
+              --from-y: -80.51px;
+              --delay: 85ms;
+              --size: 5.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 28.46px;
+              --y: -75.53px;
+              --from-x: -46.98px;
+              --from-y: 174.8px;
+              --delay: 102ms;
+              --size: 3.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 40.93px;
+              --y: -79.23px;
+              --from-x: -67.76px;
+              --from-y: -130.45px;
+              --delay: 119ms;
+              --size: 4.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 54.4px;
+              --y: -79.27px;
+              --from-x: 167.2px;
+              --from-y: 61.06px;
+              --delay: 136ms;
+              --size: 5.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 67.76px;
+              --y: -75.45px;
+              --from-x: -133.1px;
+              --from-y: 54.95px;
+              --delay: 153ms;
+              --size: 3.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 79.78px;
+              --y: -68.02px;
+              --from-x: 74.17px;
+              --from-y: -158.51px;
+              --delay: 170ms;
+              --size: 4.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 89.34px;
+              --y: -57.61px;
+              --from-x: 42.2px;
+              --from-y: 134.54px;
+              --delay: 187ms;
+              --size: 5.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 95.48px;
+              --y: -45.1px;
+              --from-x: -148.82px;
+              --from-y: -86.24px;
+              --delay: 204ms;
+              --size: 3.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 97.6px;
+              --y: -31.4px;
+              --from-x: 134.78px;
+              --from-y: -29.64px;
+              --delay: 221ms;
+              --size: 4.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 95.48px;
+              --y: -17.33px;
+              --from-x: -97.19px;
+              --from-y: 138.26px;
+              --delay: 238ms;
+              --size: 5.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 89.34px;
+              --y: -3.47px;
+              --from-x: -17.36px;
+              --from-y: -133.88px;
+              --delay: 255ms;
+              --size: 3.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 79.78px;
+              --y: 9.83px;
+              --from-x: 126.94px;
+              --from-y: 106.97px;
+              --delay: 272ms;
+              --size: 4.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 67.76px;
+              --y: 22.47px;
+              --from-x: -131.89px;
+              --from-y: 5.46px;
+              --delay: 289ms;
+              --size: 5.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 54.4px;
+              --y: 34.51px;
+              --from-x: 115.53px;
+              --from-y: -114.98px;
+              --delay: 306ms;
+              --size: 3.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 40.93px;
+              --y: 46.03px;
+              --from-x: -5.95px;
+              --from-y: 128.86px;
+              --delay: 323ms;
+              --size: 4.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 28.46px;
+              --y: 57.04px;
+              --from-x: -102.52px;
+              --from-y: -122.84px;
+              --delay: 340ms;
+              --size: 5.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 17.89px;
+              --y: 67.43px;
+              --from-x: 124.88px;
+              --from-y: 16.79px;
+              --delay: 357ms;
+              --size: 3.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 9.8px;
+              --y: 76.91px;
+              --from-x: -128.87px;
+              --from-y: 89.68px;
+              --delay: 374ms;
+              --size: 4.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 4.35px;
+              --y: 85.04px;
+              --from-x: 41.25px;
+              --from-y: -183.42px;
+              --delay: 391ms;
+              --size: 5.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 1.34px;
+              --y: 91.34px;
+              --from-x: 76.58px;
+              --from-y: 133.61px;
+              --delay: 408ms;
+              --size: 3.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.17px;
+              --y: 95.33px;
+              --from-x: -176.25px;
+              --from-y: -56.21px;
+              --delay: 5ms;
+              --size: 4.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: 96.7px;
+              --from-x: 137.07px;
+              --from-y: -63.34px;
+              --delay: 22ms;
+              --size: 5.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.17px;
+              --y: 95.33px;
+              --from-x: -70.25px;
+              --from-y: 167.9px;
+              --delay: 39ms;
+              --size: 3.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -1.34px;
+              --y: 91.34px;
+              --from-x: -50.1px;
+              --from-y: -139.26px;
+              --delay: 56ms;
+              --size: 4.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -4.35px;
+              --y: 85.04px;
+              --from-x: 158.46px;
+              --from-y: 83.26px;
+              --delay: 73ms;
+              --size: 5.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -9.8px;
+              --y: 76.91px;
+              --from-x: -140.21px;
+              --from-y: 36.97px;
+              --delay: 90ms;
+              --size: 3.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -17.89px;
+              --y: 67.43px;
+              --from-x: 95.17px;
+              --from-y: -148.05px;
+              --delay: 107ms;
+              --size: 4.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -28.46px;
+              --y: 57.04px;
+              --from-x: 24.07px;
+              --from-y: 139.95px;
+              --delay: 124ms;
+              --size: 5.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -40.93px;
+              --y: 46.03px;
+              --from-x: -136.79px;
+              --from-y: -105.91px;
+              --delay: 141ms;
+              --size: 3.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -54.4px;
+              --y: 34.51px;
+              --from-x: 138.52px;
+              --from-y: -11.49px;
+              --delay: 158ms;
+              --size: 4.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -67.76px;
+              --y: 22.47px;
+              --from-x: -115.43px;
+              --from-y: 124.8px;
+              --delay: 175ms;
+              --size: 5.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -79.78px;
+              --y: 9.83px;
+              --from-x: 0.65px;
+              --from-y: -136px;
+              --delay: 192ms;
+              --size: 3.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -89.34px;
+              --y: -3.47px;
+              --from-x: 112.22px;
+              --from-y: 123.68px;
+              --delay: 209ms;
+              --size: 4.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -95.48px;
+              --y: -17.33px;
+              --from-x: -132.43px;
+              --from-y: -12.26px;
+              --delay: 226ms;
+              --size: 5.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -97.6px;
+              --y: -31.4px;
+              --from-x: 130.62px;
+              --from-y: -99.16px;
+              --delay: 243ms;
+              --size: 3.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -95.48px;
+              --y: -45.1px;
+              --from-x: -23.25px;
+              --from-y: 127.9px;
+              --delay: 260ms;
+              --size: 4.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -89.34px;
+              --y: -57.61px;
+              --from-x: -85.77px;
+              --from-y: -136.25px;
+              --delay: 277ms;
+              --size: 5.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -79.78px;
+              --y: -68.02px;
+              --from-x: 122.49px;
+              --from-y: 33.55px;
+              --delay: 294ms;
+              --size: 3.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -67.76px;
+              --y: -75.45px;
+              --from-x: -140.56px;
+              --from-y: 72.16px;
+              --delay: 311ms;
+              --size: 4.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -54.4px;
+              --y: -79.27px;
+              --from-x: 65.67px;
+              --from-y: -177.22px;
+              --delay: 328ms;
+              --size: 5.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -40.93px;
+              --y: -79.23px;
+              --from-x: 58.46px;
+              --from-y: 143.55px;
+              --delay: 345ms;
+              --size: 3.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -28.46px;
+              --y: -75.53px;
+              --from-x: -168.09px;
+              --from-y: -79.63px;
+              --delay: 362ms;
+              --size: 4.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -17.89px;
+              --y: -68.93px;
+              --from-x: 145.25px;
+              --from-y: -44.81px;
+              --delay: 379ms;
+              --size: 5.5px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -9.8px;
+              --y: -60.58px;
+              --from-x: -92.5px;
+              --from-y: 157.9px;
+              --delay: 396ms;
+              --size: 3.5px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -4.35px;
+              --y: -51.91px;
+              --from-x: -31.31px;
+              --from-y: -145.67px;
+              --delay: 413ms;
+              --size: 4.5px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -1.34px;
+              --y: -44.39px;
+              --from-x: 146.76px;
+              --from-y: 104.22px;
+              --delay: 10ms;
+              --size: 5.5px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.17px;
+              --y: -39.3px;
+              --from-x: -144.88px;
+              --from-y: 18.08px;
+              --delay: 27ms;
+              --size: 3.5px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: -32.62px;
+              --from-x: -22.83px;
+              --from-y: 142.18px;
+              --delay: 61ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.27px;
+              --y: -34.92px;
+              --from-x: -96.26px;
+              --from-y: -146.15px;
+              --delay: 78ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 2.1px;
+              --y: -41.22px;
+              --from-x: 136.73px;
+              --from-y: 34.44px;
+              --delay: 95ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 6.7px;
+              --y: -49.9px;
+              --from-x: -151.36px;
+              --from-y: 81.69px;
+              --delay: 112ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 14.66px;
+              --y: -58.71px;
+              --from-x: 45.27px;
+              --from-y: -130.36px;
+              --delay: 129ms;
+              --size: 3px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 25.8px;
+              --y: -65.37px;
+              --from-x: 66.96px;
+              --from-y: 155.17px;
+              --delay: 146ms;
+              --size: 4px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 39.18px;
+              --y: -68.08px;
+              --from-x: -123.17px;
+              --from-y: -55.27px;
+              --delay: 163ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 53.25px;
+              --y: -65.93px;
+              --from-x: 157.58px;
+              --from-y: -52.19px;
+              --delay: 180ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 66.13px;
+              --y: -58.97px;
+              --from-x: -64.36px;
+              --from-y: 115.25px;
+              --delay: 197ms;
+              --size: 4px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 75.97px;
+              --y: -48.1px;
+              --from-x: -37.53px;
+              --from-y: -158.62px;
+              --delay: 214ms;
+              --size: 2px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 81.3px;
+              --y: -34.7px;
+              --from-x: 106.7px;
+              --from-y: 72.5px;
+              --delay: 231ms;
+              --size: 3px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 81.3px;
+              --y: -20.18px;
+              --from-x: -158.33px;
+              --from-y: 23.08px;
+              --delay: 248ms;
+              --size: 4px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 75.97px;
+              --y: -5.68px;
+              --from-x: 79.66px;
+              --from-y: -97.63px;
+              --delay: 265ms;
+              --size: 2px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 66.13px;
+              --y: 8.17px;
+              --from-x: 8.98px;
+              --from-y: 156.74px;
+              --delay: 282ms;
+              --size: 3px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 53.25px;
+              --y: 21.18px;
+              --from-x: -134.72px;
+              --from-y: -131.13px;
+              --delay: 299ms;
+              --size: 4px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 39.18px;
+              --y: 33.45px;
+              --from-x: 153.93px;
+              --from-y: 4.66px;
+              --delay: 316ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 25.8px;
+              --y: 45.07px;
+              --from-x: -140.13px;
+              --from-y: 120.78px;
+              --delay: 333ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 14.66px;
+              --y: 55.92px;
+              --from-x: 17.75px;
+              --from-y: -149.95px;
+              --delay: 350ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 6.7px;
+              --y: 65.57px;
+              --from-x: 106.31px;
+              --from-y: 147.72px;
+              --delay: 367ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 2.1px;
+              --y: 73.3px;
+              --from-x: -144.89px;
+              --from-y: -30.18px;
+              --delay: 384ms;
+              --size: 3px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.27px;
+              --y: 78.35px;
+              --from-x: 153.87px;
+              --from-y: -91.46px;
+              --delay: 401ms;
+              --size: 4px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: 80.11px;
+              --from-x: -41.86px;
+              --from-y: 138.83px;
+              --delay: 418ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.27px;
+              --y: 78.35px;
+              --from-x: -76.36px;
+              --from-y: -158.57px;
+              --delay: 15ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -2.1px;
+              --y: 73.3px;
+              --from-x: 131.85px;
+              --from-y: 52.73px;
+              --delay: 32ms;
+              --size: 4px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -6.7px;
+              --y: 65.57px;
+              --from-x: -161.84px;
+              --from-y: 61.14px;
+              --delay: 49ms;
+              --size: 2px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -14.66px;
+              --y: 55.92px;
+              --from-x: 62.7px;
+              --from-y: -124.06px;
+              --delay: 66ms;
+              --size: 3px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -25.8px;
+              --y: 45.07px;
+              --from-x: 45.95px;
+              --from-y: 163.67px;
+              --delay: 83ms;
+              --size: 4px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -39.18px;
+              --y: 33.45px;
+              --from-x: -115.55px;
+              --from-y: -71.72px;
+              --delay: 100ms;
+              --size: 2px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -53.25px;
+              --y: 21.18px;
+              --from-x: 164.11px;
+              --from-y: -30.91px;
+              --delay: 117ms;
+              --size: 3px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -66.13px;
+              --y: 8.17px;
+              --from-x: -79.75px;
+              --from-y: 106.44px;
+              --delay: 134ms;
+              --size: 4px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -75.97px;
+              --y: -5.68px;
+              --from-x: -16.15px;
+              --from-y: -163.2px;
+              --delay: 151ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -81.3px;
+              --y: -20.18px;
+              --from-x: 96.83px;
+              --from-y: 86.74px;
+              --delay: 168ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -81.3px;
+              --y: -34.7px;
+              --from-x: -160.99px;
+              --from-y: 1.79px;
+              --delay: 185ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -75.97px;
+              --y: -48.1px;
+              --from-x: 92.69px;
+              --from-y: -86.82px;
+              --delay: 202ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -66.13px;
+              --y: -58.97px;
+              --from-x: -12.06px;
+              --from-y: 157.54px;
+              --delay: 219ms;
+              --size: 3px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -53.25px;
+              --y: -65.93px;
+              --from-x: -116.65px;
+              --from-y: -148.7px;
+              --delay: 236ms;
+              --size: 4px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -39.18px;
+              --y: -68.08px;
+              --from-x: 152.92px;
+              --from-y: 25.3px;
+              --delay: 253ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -25.8px;
+              --y: -65.37px;
+              --from-x: -155.82px;
+              --from-y: 101.57px;
+              --delay: 270ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -14.66px;
+              --y: -58.71px;
+              --from-x: 37.83px;
+              --from-y: -147.22px;
+              --delay: 287ms;
+              --size: 4px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -6.7px;
+              --y: -49.9px;
+              --from-x: 86.15px;
+              --from-y: 161.46px;
+              --delay: 304ms;
+              --size: 2px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -2.1px;
+              --y: -41.22px;
+              --from-x: -140.52px;
+              --from-y: -49.55px;
+              --delay: 321ms;
+              --size: 3px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.27px;
+              --y: -34.92px;
+              --from-x: 165.61px;
+              --from-y: -70.53px;
+              --delay: 338ms;
+              --size: 4px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: -26.82px;
+              --from-x: -154.81px;
+              --from-y: -51.03px;
+              --delay: 122ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.47px;
+              --y: -29.84px;
+              --from-x: 117.62px;
+              --from-y: -52.98px;
+              --delay: 139ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 3.56px;
+              --y: -37.57px;
+              --from-x: -63.18px;
+              --from-y: 147px;
+              --delay: 156ms;
+              --size: 4px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 10.88px;
+              --y: -46.62px;
+              --from-x: -41.51px;
+              --from-y: -118.97px;
+              --delay: 173ms;
+              --size: 2px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 22.43px;
+              --y: -53.02px;
+              --from-x: 138.27px;
+              --from-y: 74.37px;
+              --delay: 190ms;
+              --size: 3px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 36.47px;
+              --y: -53.8px;
+              --from-x: -182.24px;
+              --from-y: 46.18px;
+              --delay: 207ms;
+              --size: 4px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 50.03px;
+              --y: -48.07px;
+              --from-x: 84.52px;
+              --from-y: -128.73px;
+              --delay: 224ms;
+              --size: 2px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 59.85px;
+              --y: -36.97px;
+              --from-x: 29.59px;
+              --from-y: 182.62px;
+              --delay: 241ms;
+              --size: 3px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 63.44px;
+              --y: -22.86px;
+              --from-x: -118.49px;
+              --from-y: -93.59px;
+              --delay: 258ms;
+              --size: 4px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 59.85px;
+              --y: -8.05px;
+              --from-x: 181.51px;
+              --from-y: -13.29px;
+              --delay: 275ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 50.03px;
+              --y: 6.03px;
+              --from-x: -101.54px;
+              --from-y: 107.68px;
+              --delay: 292ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 36.47px;
+              --y: 19.02px;
+              --from-x: 2.58px;
+              --from-y: -178.98px;
+              --delay: 309ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 22.43px;
+              --y: 31.09px;
+              --from-x: 96.39px;
+              --from-y: 108.32px;
+              --delay: 326ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 10.88px;
+              --y: 42.19px;
+              --from-x: -175.09px;
+              --from-y: -17.91px;
+              --delay: 343ms;
+              --size: 3px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 3.56px;
+              --y: 51.61px;
+              --from-x: 113.93px;
+              --from-y: -84.76px;
+              --delay: 360ms;
+              --size: 4px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.47px;
+              --y: 58.08px;
+              --from-x: -32.59px;
+              --from-y: 169.9px;
+              --delay: 377ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: 60.41px;
+              --from-x: -72.91px;
+              --from-y: -118.35px;
+              --delay: 394ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.47px;
+              --y: 58.08px;
+              --from-x: 163.52px;
+              --from-y: 46.49px;
+              --delay: 411ms;
+              --size: 4px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -3.56px;
+              --y: 51.61px;
+              --from-x: -121.58px;
+              --from-y: 60.94px;
+              --delay: 8ms;
+              --size: 2px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -10.88px;
+              --y: 42.19px;
+              --from-x: 59.54px;
+              --from-y: -156.03px;
+              --delay: 25ms;
+              --size: 3px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -22.43px;
+              --y: 31.09px;
+              --from-x: 48.97px;
+              --from-y: 123.66px;
+              --delay: 42ms;
+              --size: 4px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -36.47px;
+              --y: 19.02px;
+              --from-x: -147.52px;
+              --from-y: -71.64px;
+              --delay: 59ms;
+              --size: 2px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -50.03px;
+              --y: 6.03px;
+              --from-x: 124.59px;
+              --from-y: -37.12px;
+              --delay: 76ms;
+              --size: 3px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -59.85px;
+              --y: -8.05px;
+              --from-x: -82.72px;
+              --from-y: 138.12px;
+              --delay: 93ms;
+              --size: 4px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -63.44px;
+              --y: -22.86px;
+              --from-x: -25.48px;
+              --from-y: -124.42px;
+              --delay: 110ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -59.85px;
+              --y: -36.97px;
+              --from-x: 127.93px;
+              --from-y: 92.72px;
+              --delay: 127ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -50.03px;
+              --y: -48.07px;
+              --from-x: -187.76px;
+              --from-y: 21.59px;
+              --delay: 144ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -36.47px;
+              --y: -53.8px;
+              --from-x: 101.58px;
+              --from-y: -117.07px;
+              --delay: 161ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -22.43px;
+              --y: -53.02px;
+              --from-x: 5.01px;
+              --from-y: 185.93px;
+              --delay: 178ms;
+              --size: 3px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -10.88px;
+              --y: -46.62px;
+              --from-x: -105.66px;
+              --from-y: -109.27px;
+              --delay: 195ms;
+              --size: 4px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -3.56px;
+              --y: -37.57px;
+              --from-x: 182.66px;
+              --from-y: 11.08px;
+              --delay: 212ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.47px;
+              --y: -29.84px;
+              --from-x: -115.76px;
+              --from-y: 93.81px;
+              --delay: 229ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: -20.12px;
+              --from-x: 83.66px;
+              --from-y: -161.63px;
+              --delay: 183ms;
+              --size: 2px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.94px;
+              --y: -24.16px;
+              --from-x: 38.62px;
+              --from-y: 142.87px;
+              --delay: 200ms;
+              --size: 3px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 6.63px;
+              --y: -32.7px;
+              --from-x: -151.17px;
+              --from-y: -95.86px;
+              --delay: 217ms;
+              --size: 4px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 18.12px;
+              --y: -38.13px;
+              --from-x: 142.75px;
+              --from-y: -25.46px;
+              --delay: 234ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 31.59px;
+              --y: -35.16px;
+              --from-x: -106.89px;
+              --from-y: 139.83px;
+              --delay: 251ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 40.7px;
+              --y: -24.41px;
+              --from-x: -12.62px;
+              --from-y: -141.44px;
+              --delay: 268ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 40.7px;
+              --y: -10.35px;
+              --from-x: 127.73px;
+              --from-y: 116.68px;
+              --delay: 285ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 31.59px;
+              --y: 3.24px;
+              --from-x: -139px;
+              --from-y: 0.2px;
+              --delay: 302ms;
+              --size: 3px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 18.12px;
+              --y: 15.36px;
+              --from-x: 125.19px;
+              --from-y: -115.01px;
+              --delay: 319ms;
+              --size: 4px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 6.63px;
+              --y: 26.16px;
+              --from-x: -11.7px;
+              --from-y: 135.5px;
+              --delay: 336ms;
+              --size: 2px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0.94px;
+              --y: 34.41px;
+              --from-x: -101.8px;
+              --from-y: -132.39px;
+              --delay: 353ms;
+              --size: 3px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: 0px;
+              --y: 37.59px;
+              --from-x: 131px;
+              --from-y: 22.98px;
+              --delay: 370ms;
+              --size: 4px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.94px;
+              --y: 34.41px;
+              --from-x: -138.25px;
+              --from-y: 88.22px;
+              --delay: 387ms;
+              --size: 2px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -6.63px;
+              --y: 26.16px;
+              --from-x: 33.57px;
+              --from-y: -125.59px;
+              --delay: 404ms;
+              --size: 3px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -18.12px;
+              --y: 15.36px;
+              --from-x: 74.41px;
+              --from-y: 142.77px;
+              --delay: 1ms;
+              --size: 4px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -31.59px;
+              --y: 3.24px;
+              --from-x: -119.36px;
+              --from-y: -43.39px;
+              --delay: 18ms;
+              --size: 2px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -40.7px;
+              --y: -10.35px;
+              --from-x: 145.96px;
+              --from-y: -60.5px;
+              --delay: 35ms;
+              --size: 3px;
+              --particle-color: #dbb4f3;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -40.7px;
+              --y: -24.41px;
+              --from-x: -79.86px;
+              --from-y: 171.3px;
+              --delay: 52ms;
+              --size: 4px;
+              --particle-color: #7954a0;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -31.59px;
+              --y: -35.16px;
+              --from-x: -46.61px;
+              --from-y: -147.83px;
+              --delay: 69ms;
+              --size: 2px;
+              --particle-color: #a66bcd;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -18.12px;
+              --y: -38.13px;
+              --from-x: 161.07px;
+              --from-y: 93.03px;
+              --delay: 86ms;
+              --size: 3px;
+              --particle-color: #c391e5;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -6.63px;
+              --y: -32.7px;
+              --from-x: -148.41px;
+              --from-y: 32.86px;
+              --delay: 103ms;
+              --size: 4px;
+              --particle-color: #9159bb;
+            "
+          ></span
+          ><span
+            class="heart-particle"
+            style="
+              --x: -0.94px;
+              --y: -24.16px;
+              --from-x: 105.03px;
+              --from-y: -149.86px;
+              --delay: 120ms;
+              --size: 2px;
+              --particle-color: #dbb4f3;
+            "
+          ></span>
+        </div>
+      </div>
+      <!-- particle-heart:end -->
+      <h1>I love you Rixi</h1>
+      <p>Getting your calendar ready&hellip;</p>
+      <div class="welcome-track" aria-hidden="true"><span></span></div>
+    </section>
+    <div id="workspace" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="/"
+          ><span class="brand-name">R&amp;R<span>Calendar</span></span></a
+        >
+        <div class="workspace-label">WORKSPACE</div>
+        <button class="nav-item selected" id="calendar-nav">
+          <span>▦</span> My calendar <span class="nav-arrow">↗</span>
+        </button>
+        <a class="nav-item finance-nav" href="#finances-section"
+          ><span aria-hidden="true">$</span> Finances</a
+        >
+        <div class="sidebar-bottom">
+          <div class="private-label">
+            <span class="status-dot"></span> Private workspace
+          </div>
+          <button id="logout" class="lock-button">
+            ♧ &nbsp; Lock workspace <span>↗</span>
+          </button>
+        </div>
+      </aside>
+      <main>
+        <header class="topbar">
+          <span
+            >Workspace <span class="crumb">/</span>
+            <strong>My calendar</strong></span
+          ><span class="today-label" id="today-label"></span>
+        </header>
+        <div class="main-content">
+          <section class="page-heading">
+            <div>
+              <h1>R&amp;R Calendar</h1>
+            </div>
+            <button class="primary" id="add-task">
+              <span>＋</span> Add task
+            </button>
+          </section>
+          <section class="stats">
+            <div class="stat">
+              <span class="stat-icon neutral">▦</span>
+              <div>
+                <span>Total tasks</span><strong id="total-count">0</strong>
+              </div>
+            </div>
+            <div class="stat">
+              <span class="stat-icon orange">◷</span>
+              <div>
+                <span>In progress</span><strong id="active-count">0</strong>
+              </div>
+            </div>
+            <div class="stat">
+              <span class="stat-icon green">✓</span>
+              <div>
+                <span>Completed</span><strong id="done-count">0</strong>
+              </div>
+            </div>
+          </section>
+          <section class="calendar-card">
+            <div class="calendar-toolbar">
+              <div class="month-controls">
+                <h2 id="month-label"></h2>
+                <button
+                  id="prev-month"
+                  class="icon-button"
+                  aria-label="Previous month"
+                >
+                  ‹</button
+                ><button
+                  id="next-month"
+                  class="icon-button"
+                  aria-label="Next month"
+                >
+                  ›</button
+                ><button id="today-button" class="outline-button">Today</button>
+              </div>
+              <div class="calendar-options">
+                <div class="filter-group" aria-label="Filter tasks">
+                  <button data-filter="all" class="active">All tasks</button
+                  ><button data-filter="active">In progress</button
+                  ><button data-filter="done">Completed</button>
+                </div>
+                <span class="view-label">▦ &nbsp; Month</span>
+              </div>
+            </div>
+            <div class="calendar-scroll">
+              <div class="weekdays">
+                <span>MON</span><span>TUE</span><span>WED</span><span>THU</span
+                ><span>FRI</span><span>SAT</span><span>SUN</span>
+              </div>
+              <div id="calendar-grid"></div>
+            </div>
+            <div class="calendar-footer">
+              <div>
+                <span class="legend-dot planned"></span> Planned
+                <span class="legend-dot active"></span> In progress
+                <span class="legend-dot done"></span> Completed
+              </div>
+              <span
+                >Click a day to add a task
+                <span class="footer-spark">✧</span></span
+              >
+            </div>
+          </section>
+          <section class="upcoming">
+            <div class="section-heading">
+              <h2>Open tasks <span id="upcoming-count"></span></h2>
+            </div>
+            <div id="task-list"></div>
+          </section>
+          <section id="finances-section" class="finances-section">
+            <div class="section-heading">
+              <h2>Finances</h2>
+              <strong id="finance-total">Total: 0.00</strong>
+            </div>
+            <form id="finance-form" class="finance-form">
+              <div>
+                <label for="finance-purpose">What is it for?</label
+                ><input
+                  id="finance-purpose"
+                  maxlength="160"
+                  required
+                  placeholder="e.g. Groceries or wedding venue"
+                />
+              </div>
+              <div>
+                <label for="finance-amount">Amount</label
+                ><input
+                  id="finance-amount"
+                  type="number"
+                  min="0.01"
+                  max="999999999.99"
+                  step="0.01"
+                  required
+                  placeholder="0.00"
+                />
+              </div>
+              <div>
+                <label for="finance-category">Category</label
+                ><select id="finance-category" required>
+                  <option value="Org">Org</option>
+                  <option value="Personal/Shopping">Personal/Shopping</option>
+                  <option value="Family">Family</option>
+                  <option value="Marriage/Future">Marriage/Future</option>
+                </select>
+              </div>
+              <div class="finance-form-actions">
+                <button class="primary" id="finance-save" type="submit">
+                  Add finance</button
+                ><button
+                  class="outline-button"
+                  id="finance-cancel"
+                  type="button"
+                  hidden
+                >
+                  Cancel edit
+                </button>
+              </div>
+              <p id="finance-error" role="alert"></p>
+            </form>
+            <div id="finance-list" class="finance-list"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <dialog id="task-dialog">
+      <form id="task-form">
+        <div class="dialog-heading">
+          <div>
+            <h2 id="dialog-title">New task</h2>
+          </div>
+          <button
+            type="button"
+            id="close-dialog"
+            class="icon-button"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <label for="task-title">Task name</label
+        ><input
+          id="task-title"
+          required
+          maxlength="160"
+          placeholder="What are you working on?"
+        /><label for="task-description"
+          >Notes <span class="muted">(optional)</span></label
+        ><textarea
+          id="task-description"
+          rows="3"
+          maxlength="10000"
+          placeholder="A few details, a next step, or a useful reminder…"
+        ></textarea>
+        <div class="form-row">
+          <div>
+            <label for="task-start">Start date</label
+            ><input id="task-start" type="date" required />
+          </div>
+          <div>
+            <label for="task-end">End date</label
+            ><input id="task-end" type="date" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="task-status">Status</label
+            ><select id="task-status">
+              <option value="planned">Planned</option>
+              <option value="active">In progress</option>
+              <option value="done">Completed</option>
+            </select>
+          </div>
+          <div>
+            <label for="task-color">Task color</label
+            ><select id="task-color">
+              <option value="green">Plum</option>
+              <option value="blue">Lilac</option>
+              <option value="orange">Soft orange</option>
+              <option value="purple">Lavender</option>
+            </select>
+          </div>
+        </div>
+        <div class="progress-setting">
+          <label class="switch-label" for="show-progress"
+            ><span
+              >Show progress bar<small
+                >Track this task with a percentage</small
+              ></span
+            ><input id="show-progress" type="checkbox" role="switch"
+          /></label>
+          <div id="progress-controls" hidden>
+            <input
+              type="range"
+              id="task-progress"
+              min="0"
+              max="100"
+              value="0"
+              aria-label="Progress"
+            />
+            <div class="percentage-input">
+              <input
+                type="number"
+                id="progress-number"
+                min="0"
+                max="100"
+                value="0"
+                aria-label="Progress percentage"
+              /><span>%</span>
+            </div>
+          </div>
+        </div>
+        <label for="task-files"
+          >Documents <span class="muted">(optional)</span></label
+        ><label class="upload-box" for="task-files"
+          ><span>↥</span><strong>Choose documents to attach</strong
+          ><small
+            >Any file type · Up to 20 MB per file · Password protected</small
+          ></label
+        ><input id="task-files" type="file" multiple class="file-input" />
+        <div id="document-list"></div>
+        <p id="form-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button type="button" id="delete-task" class="danger">
+            Delete task
+          </button>
+          <div>
+            <button type="button" id="cancel-dialog" class="outline-button">
+              Cancel</button
+            ><button type="submit" id="save-task" class="primary">
+              Save task ↗
+            </button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" role="status" hidden></div>
+  </body>
+</html>
