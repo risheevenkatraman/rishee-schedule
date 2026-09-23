@@ -7,7 +7,9 @@
     "start": "node server.js",
     "test": "node --test",
     "build": "node scripts/build-heart.js",
-    "dev:heart": "next dev heart --port 3001",
+    "prebuild": "npm --prefix heart ci",
+    "predev:heart": "npm --prefix heart ci",
+    "dev:heart": "npm --prefix heart run dev",
     "build:amplify": "npm run build && node scripts/build-amplify.js",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
@@ -21,10 +23,7 @@
     "@aws-sdk/client-secrets-manager": "^3.1138.0",
     "@aws-sdk/lib-dynamodb": "^3.1138.0",
     "@aws-sdk/s3-presigned-post": "^3.1138.0",
-    "@aws-sdk/s3-request-presigner": "^3.1138.0",
-    "next": "^16.3.6",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "@aws-sdk/s3-request-presigner": "^3.1138.0"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
