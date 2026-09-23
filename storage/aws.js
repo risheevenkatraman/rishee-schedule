@@ -27,7 +27,14 @@ export async function loadCloudPassword(config) {
   const result = await client.send(
     new GetSecretValueCommand({ SecretId: config.secretArn }),
   );
-  const password = JSON.parse(result.SecretString).password;
+  let password;
+  try {
+    password = JSON.parse(result.SecretString)?.password;
+  } catch {
+    throw new Error(
+      'The cloud password secret must be a JSON object with a password field.',
+    );
+  }
   if (typeof password !== 'string' || password.length < 16)
     throw new Error('The cloud password must contain at least 16 characters.');
   return password;

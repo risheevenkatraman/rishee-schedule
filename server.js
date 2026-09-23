@@ -1,15 +1,11 @@
 import http from 'node:http';
-import {
-  randomBytes,
-  scryptSync,
-  timingSafeEqual,
-  createHash,
-} from 'node:crypto';
+import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createLocalStorage } from './storage/local.js';
 import { createCloudStorage, loadCloudPassword } from './storage/aws.js';
+import { createPasswordLoader } from './storage/password.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const cloudConfig = process.env.APP_CLOUD_CONFIG
@@ -18,10 +14,8 @@ const cloudConfig = process.env.APP_CLOUD_CONFIG
 const store = cloudConfig
   ? createCloudStorage(cloudConfig)
   : createLocalStorage(process.env.DATA_DIR || path.join(root, 'data'));
-let password = cloudConfig
-  ? await loadCloudPassword(cloudConfig)
-  : process.env.APP_PASSWORD;
-if (!password) {
+let password = process.env.APP_PASSWORD;
+if (!cloudConfig && !password) {
   const passwordFile = path.join(root, 'docs', 'password.txt');
   mkdirSync(path.dirname(passwordFile), { recursive: true });
   if (!existsSync(passwordFile))
@@ -31,9 +25,30 @@ if (!password) {
   password = readFileSync(passwordFile, 'utf8').trim();
   console.log(`Your app password is saved in ${passwordFile}`);
 }
-const salt = randomBytes(16),
-  passwordHash = scryptSync(password, salt, 64);
-const passwordVersion = createHash('sha256').update(password).digest('hex');
+const getPassword = createPasswordLoader(
+  () => (cloudConfig ? loadCloudPassword(cloudConfig) : password),
+  (error) => {
+    // Presence flags only; never log credentials, tokens, endpoint values, or secret content.
+    console.error(
+      JSON.stringify({
+        event: 'workspace-auth-load-failed',
+        phase: 'request',
+        errorName: error.name,
+        hasEnvironmentCredentials: Boolean(
+          process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY,
+        ),
+        hasContainerCredentialEndpoint: Boolean(
+          process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI ||
+          process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI,
+        ),
+        hasWebIdentityTokenFile: Boolean(
+          process.env.AWS_WEB_IDENTITY_TOKEN_FILE,
+        ),
+        hasNamedProfile: Boolean(process.env.AWS_PROFILE),
+      }),
+    );
+  },
+);
 const financeCategories = [
   'Org',
   'Personal/Shopping',
@@ -145,13 +160,20 @@ const server = http.createServer(async (req, res) => {
     )
       return json(res, 403, { error: 'Request origin rejected.' });
     const sid = req.headers.cookie?.match(/(?:^|;\s*)session=([a-f0-9]+)/)?.[1];
+    const auth =
+      route.startsWith('/api/') &&
+      (sid || (route === '/api/login' && req.method === 'POST'))
+        ? await getPassword()
+        : null;
     const session =
-      sid && store.cloud ? await store.get('sessions', sid) : null;
+      route.startsWith('/api/') && sid && store.cloud
+        ? await store.get('sessions', sid)
+        : null;
     const authorized = store.cloud
       ? Boolean(
           session &&
           session.expiry > Date.now() &&
-          session.passwordVersion === passwordVersion,
+          session.passwordVersion === auth?.passwordVersion,
         )
       : sid && sessions.get(sid) > Date.now();
     if (route === '/api/login' && req.method === 'POST') {
@@ -176,7 +198,10 @@ const server = http.createServer(async (req, res) => {
       attempt.count++;
       if (
         typeof input.password !== 'string' ||
-        !timingSafeEqual(scryptSync(input.password, salt, 64), passwordHash)
+        !timingSafeEqual(
+          scryptSync(input.password, auth.salt, 64),
+          auth.passwordHash,
+        )
       )
         return json(res, 401, {
           error: 'That password isn’t correct. Please try again.',
@@ -189,7 +214,7 @@ const server = http.createServer(async (req, res) => {
           id: token,
           expiry: Date.now() + 43200000,
           expiresAt: Math.floor(Date.now() / 1000) + 43200,
-          passwordVersion,
+          passwordVersion: auth.passwordVersion,
         });
       else sessions.set(token, Date.now() + 43200000);
       res.setHeader(
