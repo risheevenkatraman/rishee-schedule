@@ -1987,21 +1987,63 @@
         </div>
       </main>
     </div>
-    <dialog id="task-dialog">
-      <form id="task-form">
-        <div class="dialog-heading">
-          <div>
-            <h2 id="dialog-title">New task</h2>
-          </div>
-          <button
-            type="button"
-            id="close-dialog"
-            class="icon-button"
-            aria-label="Close"
-          >
-            ×
-          </button>
+    <dialog id="task-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-heading">
+        <div>
+          <h2 id="dialog-title">New task</h2>
         </div>
+        <button
+          type="button"
+          id="close-dialog"
+          class="icon-button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+      <section id="task-overview" hidden aria-label="Task overview">
+        <span id="overview-status" class="status-pill"></span>
+        <dl class="overview-dates">
+          <div>
+            <dt>Start date</dt>
+            <dd id="overview-start"></dd>
+          </div>
+          <div>
+            <dt>End date</dt>
+            <dd id="overview-end"></dd>
+          </div>
+        </dl>
+        <section class="overview-section">
+          <h3>Notes</h3>
+          <p id="overview-notes"></p>
+        </section>
+        <section id="overview-progress-section" class="overview-section">
+          <div class="overview-progress-heading">
+            <h3 id="overview-progress-label">Progress</h3>
+            <strong id="overview-percent"></strong>
+          </div>
+          <progress
+            id="overview-progress"
+            max="100"
+            aria-labelledby="overview-progress-label"
+          ></progress>
+        </section>
+        <section class="overview-section">
+          <h3>Documents</h3>
+          <div id="overview-documents"></div>
+        </section>
+        <div class="dialog-actions">
+          <div>
+            <button type="button" id="close-overview" class="outline-button">
+              Close
+            </button>
+            <button type="button" id="edit-task" class="primary">
+              Edit task
+            </button>
+          </div>
+        </div>
+      </section>
+      <form id="task-form">
         <label for="task-title">Task name</label
         ><input
           id="task-title"

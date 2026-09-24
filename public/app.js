@@ -79,6 +79,9 @@ function lock() {
   $('calendar-grid').replaceChildren();
   $('task-list').replaceChildren();
   $('document-list').replaceChildren();
+  $('overview-notes').textContent = '';
+  $('overview-documents').replaceChildren();
+  $('dialog-title').textContent = 'New task';
   $('task-form').reset();
   $('password').value = '';
 }
@@ -289,10 +292,43 @@ function renderDocuments() {
     $('document-list').append(p);
   });
 }
-function openTask(task = null, date = today()) {
+function renderTaskOverview(task) {
+  $('overview-status').className = `status-pill ${task.status}`;
+  $('overview-status').textContent = statusLabel(task.status);
+  for (const field of ['start', 'end']) {
+    $('overview-' + field).textContent = new Date(
+      `${task[field]}T12:00:00`,
+    ).toLocaleDateString(undefined, { dateStyle: 'long' });
+  }
+  $('overview-notes').textContent = task.description || 'No notes added yet.';
+  $('overview-progress-section').hidden = !task.showProgress;
+  $('overview-progress').value = task.progress;
+  $('overview-percent').textContent = `${task.progress}%`;
+  $('overview-documents').replaceChildren();
+  for (const file of task.files || []) {
+    const row = document.createElement('div');
+    row.className = 'document-row';
+    const link = document.createElement('a');
+    link.href = `/api/files/${file.id}`;
+    link.textContent = file.name;
+    row.append(link);
+    $('overview-documents').append(row);
+  }
+  if (!task.files?.length)
+    $('overview-documents').textContent = 'No documents attached.';
+}
+function openTask(task = null, date = today(), edit = false) {
   editing = task?.id || null;
+  const overview = Boolean(task && !edit);
+  $('task-overview').hidden = !overview;
+  $('task-form').hidden = overview;
   $('task-form').reset();
-  $('dialog-title').textContent = task ? 'Task details' : 'New task';
+  $('dialog-title').textContent = overview
+    ? task.title
+    : task
+      ? 'Edit task'
+      : 'New task';
+  if (overview) renderTaskOverview(task);
   $('task-title').value = task?.title || '';
   $('task-description').value = task?.description || '';
   $('task-start').value = task?.start || date;
@@ -306,11 +342,22 @@ function openTask(task = null, date = today()) {
   $('delete-task').hidden = !task;
   $('form-error').textContent = '';
   renderDocuments();
-  $('task-dialog').showModal();
+  if (!$('task-dialog').open) $('task-dialog').showModal();
+  $('task-dialog').scrollTop = 0;
+  (overview ? $('edit-task') : $('task-title')).focus();
 }
 $('add-task').onclick = () => openTask();
-$('close-dialog').onclick = $('cancel-dialog').onclick = () =>
+$('edit-task').onclick = () => {
+  const task = tasks.find((t) => t.id === editing);
+  if (task) openTask(task, today(), true);
+};
+$('close-dialog').onclick = $('close-overview').onclick = () =>
   $('task-dialog').close();
+$('cancel-dialog').onclick = () => {
+  const task = tasks.find((t) => t.id === editing);
+  if (task) openTask(task);
+  else $('task-dialog').close();
+};
 $('task-start').onchange = () => {
   $('task-end').min = $('task-start').value;
   if ($('task-end').value < $('task-start').value)
@@ -367,7 +414,7 @@ $('task-form').onsubmit = async (e) => {
       $('task-files').files = remaining.files;
     }
     await refresh();
-    $('task-dialog').close();
+    openTask(tasks.find((t) => t.id === editing));
     toast('Task saved.');
   } catch (err) {
     $('form-error').textContent = err.message;

@@ -685,6 +685,69 @@ dialog::backdrop {
   font-size: 24px;
   margin-top: 7px;
 }
+.dialog-heading h2 {
+  overflow-wrap: anywhere;
+}
+.dialog-heading > div {
+  min-width: 0;
+}
+.overview-dates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px;
+  margin: 20px 0;
+  background: #faf7fc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.overview-dates dt,
+.overview-section h3 {
+  font-size: 12px;
+  font-weight: 550;
+  margin: 0 0 9px;
+}
+.overview-dates dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.overview-section {
+  margin-top: 24px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+#overview-notes {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+.overview-progress-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+#overview-progress {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ede8f1;
+  accent-color: var(--accent);
+}
+#overview-progress::-webkit-progress-bar {
+  background: #ede8f1;
+}
+#overview-progress::-webkit-progress-value {
+  background: var(--accent);
+  border-radius: 8px;
+}
+#overview-progress::-moz-progress-bar {
+  background: var(--accent);
+  border-radius: 8px;
+}
 label {
   display: block;
   font-size: 11px;
